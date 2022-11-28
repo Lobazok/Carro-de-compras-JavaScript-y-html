@@ -4,63 +4,53 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>title</title>
-    <!-- <link rel="stylesheet" href="style.css"/> -->
+    <title>Document</title>
 </head>
 <body>
-    <!-- secion donde van los productos -->
-    <section class="productos" id="productos"></section>
+    <section id="productos">
 
-
-    <!-- Carro -->
-    <section>
-        <h3>Carrito</h3>
-            <table id="carrito">
-                <thead>
-                    <tr>
-                        <th>Producto</th>
-                        <th>Cantidad</th>
-                        <th></th>
-                        <th></th>
-                        <th>Subtotal</th>
-                    </tr> 
-                </thead>
-                <tbody id="TBCarro"></tbody>
-                <tr>
-                    <th>Carro</th>
-                    <th>Cantidad</th>
-                    <th></th>
-                    <th>total</th>
-                </tr> 
-                <tr id="contenT">
-                    <td></td>
-                    <td class="cantidadT">0</td>
-                    <td class="tdvaciar"><button class="buttonPlus" onclick="VaciarCarro()">Vaciar Carro</button></td>  
-                   <td class="precioT"></td>
-                   </tr>
-            </table>
     </section>
-    <!-- Templates -->
-    <!-- Template Productos-->
-     <template id="T_Productos">
-        <div>
-            <h3 class="titulo">Name</h3>
-            <p class="description">Description</p>
-            <p class="precio">Precio</p>
-            <button class="buttonAgregarAlCarrito">Ordenar</button>
-        </div>
-     </template>
-     <!--  Template Carro -->
-     <template id="T_Carro">
-            <tr class="conten">
-             <td class="name">${Name}</td>
-             <td class="cantidad">${Cantidad}</td>
-             <td class="tdPlus"><button class="buttonPlus">+</button></td>  
-             <td class="tdLess"><button class="buttonLess">-</button></td>
-            <td class="precio">${precio}</td>
-            </tr>
-     </template>
-</body>
-<script src="./app.js"></script>
 
+    <table id="carrito">
+        <thead>
+            <tr>
+                <th>Producto</th>
+                <th>Cantidad</th>
+                <th></th>
+                <th></th>
+                <th>Subtotal</th>
+            </tr> 
+        </thead>
+        <tbody id="TBCarro">
+
+        </tbody>
+        <tr id="contenT">
+            <td></td>
+            <td class="cantidadT">0</td>
+            <td class="tdvaciar"><button class="buttonPlus" onclick="VaciarCarro()">Vaciar Carro</button></td>  
+           <td class="precioT"></td>
+           </tr>
+    </table>
+    <!-- teampleates -->
+    <template id="T_article">
+        <article class="producto">
+            <h3 class="title">title</h1>
+            <p class="description">description</p>
+            <p class="price">price</p>
+            <button class="buttonAgregarAlCarrito">Comprar</button>
+        </article>
+    </template>
+
+    <!-- teampleates -->
+    <template id="T_producto">
+        <tr class="conten">
+            <td class="name"</td>
+            <td class="cantidad"></td>
+            <td class="tdPlus"><button class="buttonPlus">+</button></td>  
+            <td class="tdLess"><button class="buttonLess">-</button></td>
+            <td class="price"></td>
+        </tr>
+    </template>
+</body>
+<script src="./index.js"></script>
 </html>
