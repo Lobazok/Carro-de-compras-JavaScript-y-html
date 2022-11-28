@@ -1,197 +1,197 @@
-//Base de datos BD
-//Base de datos productos stock
-//aqui van los productos
-const BDStockProductos = [
-    {id: "ID00", Name: "Café espresso", Description: "un exquisito café simple, lo puedes acompañar con galletas o un biscocho", Precio: 5},
-    {id: "ID01", Name: "Café doble", Description: "el doble de café el doble de energia", Precio: 8},
-    {id: "ID02", Name: "Cafe americano", Description: "es un Café espresso rebajado con agua", Precio: 6},
-    {id: "ID03", Name: "Café con leche", Description: "mitad café mitad leche, la leche es a elecion", Precio: 8},
-    {id: "ID04", Name: "Café cortado", Description: "café con un poco de leche, la leche es a elecion", Precio: 7},
-    {id: "ID05", Name: "Macchiato", Description: "café con una exquisita espuma", Precio: 8},
-    {id: "ID06", Name: "espresso panna", Description: "espresso panna", Precio: 9},
-    {id: "ID07", Name: "Cappuchino", Description: "café con leche y espuma por encima, la leche es a elecion", Precio: 12},
-    {id: "ID08", Name: "Café latte", Description: "café con mucha leche y espuma por encima, la leche es a elecion", Precio: 12},
-    {id: "ID09", Name: "Mocha", Description: "café con leche y un exquisito chocolate y espumapor encima", Precio: 12},
-    {id: "ID10", Name: "Café con sprite", Description: "Nuestro mejor producto ,un exquisito café con sprite", Precio: 20}
-]
-
-//Base de datos productos
-const BDProductos = {
-    ID00: {id: "ID00", Name: "Café espresso", Description: "un exquisito café simple, lo puedes acompañar con galletas o un biscocho", Precio: 5},
-    ID01: {id: "ID01", Name: "Café doble", Description: "el doble de café el doble de energia", Precio: 8},
-    ID02: {id: "ID02", Name: "Cafe americano", Description: "es un Café espresso rebajado con agua", Precio: 6},
-    ID03: {id: "ID03", Name: "Café con leche", Description: "mitad café mitad leche, la leche es a elecion", Precio: 8},
-    ID04: {id: "ID04", Name: "Café cortado", Description: "café con un poco de leche, la leche es a elecion", Precio: 7},
-    ID05: {id: "ID05", Name: "Macchiato", Description: "café con una exquisita espuma", Precio: 8},
-    ID06: {id: "ID06", Name: "espresso panna", Description: "espresso panna", Precio: 9},
-    ID07: {id: "ID07", Name: "Cappuchino", Description: "café con leche y espuma por encima, la leche es a elecion", Precio: 12},
-    ID08: {id: "ID08", Name: "Café latte", Description: "café con mucha leche y espuma por encima, la leche es a elecion", Precio: 12},
-    ID09: {id: "ID09", Name: "Mocha", Description: "café con leche y un exquisito chocolate y espumapor encima", Precio: 12},
-    ID10: {id: "ID10", Name: "Café con sprite", Description: "Nuestro mejor producto ,un exquisito café con sprite", Precio: 20}
+//Base de Datos
+const BD = {
+    ID00: {id: "ID00", name: "name 00", description: "description 00", price: 1},
+    ID01: {id: "ID01", name: "name 01", description: "description 01", price: 1},
+    ID02: {id: "ID02", name: "name 02", description: "description 02", price: 2},
+    ID03: {id: "ID03", name: "name 03", description: "description 03", price: 3},
+    ID04: {id: "ID04", name: "name 04", description: "description 04", price: 4},
+    ID05: {id: "ID05", name: "name 05", description: "description 05", price: 5},
+    ID06: {id: "ID06", name: "name 06", description: "description 06", price: 6},
+    ID07: {id: "ID07", name: "name 07", description: "description 07", price: 7},
+    ID08: {id: "ID08", name: "name 08", description: "description 08", price: 8},
+    ID09: {id: "ID09", name: "name 09", description: "description 09", price: 9},
 }
+//la variable del carro, donde estara listado el contenido
+var carro = []
 
-//carro
-//Acualiza el carro (esto es para mas adelante)
 function ActualizarTotal() {
     //cambia los datos de la tabla
     carroDIV = document.getElementById("contenT")
-    carroDIV.querySelector("td.cantidadT").textContent ="" + Carro.length
-    
+    carroDIV.querySelector("td.cantidadT").textContent ="" + carro.length
+
+	//calculamos el total con un ciclo for
     var total = 0;
-    for(var i = 0; i < Carro.length; i++){
-        const BDTem = Object.keys(BDProductos)
-        const PositionVal = BDTem.indexOf(Carro[i])
-        const ObjectTem = Object.values(BDProductos)[PositionVal]
-        const Prece = ObjectTem.Precio
-        total +=  Prece
+    for(var i = 0; i < carro.length; i++){
+		//obtenemos el elemento
+        id = carro[i]
+		//obtenemos la ubicacion del elemento en la base de datos
+		indexBD = Object.keys(BD).findIndex((a) => a == id)
+		//obtenemos el elemento
+		element = Object.values(BD)[indexBD]
+		//obtenemos el precio
+		Price = element.price
+		//sumamos el total del precio
+        total +=  Price
     }
-    carroDIV.querySelector("td.precioT").textContent ="" + total.toString()
+
+	//mostramos el precio
+    carroDIV.querySelector("td.precioT").textContent = total + ""
 }
 
-//el array que contienen los datos del carro
-let Carro = []
-//crear tarjetas de productos   
-BDStockProductos.forEach(element => {
-    //variables
-     //section de productos (aqui se colocan los teamples)
-    const productoDIV = document.getElementById("productos");
-    const fragment = document.createDocumentFragment();
-    //Teplate de productos
-    //se crean los productos con template y fragment
-    const template = document.querySelector("#T_Productos").content;
-    const DIVE =  template.querySelector("div")
-    const IDe = "TR_" + element.id
-    DIVE.setAttribute('id', IDe);
-    template.querySelector("h3.titulo").textContent ="" + element.Name
-    template.querySelector("p.description").textContent ="" + element.Description
-    template.querySelector("p.precio").textContent ="" + element.Precio
-    template.querySelector("button.buttonAgregarAlCarrito").setAttribute("onclick", "AgregarProductoAlCarrito(" +"BDProductos."+ element.id.toString() + ")")
-      const clone = template.cloneNode(true)
-      fragment.appendChild(clone)
-      productoDIV.appendChild(fragment)
- }
-)
+//aumenta la cantidad de un producto en el carro
+const aumentarCantidad = (element) =>{
+	//se aumenta la cantidad en el carro
+	carro.push(element.id)
 
-//se crean los producto
-function AgregarProductoAlCarrito(element){
-    //se comprueba si esta el elemento creado
-    if(Carro.includes(element.id)){
-        //ya esta el elemento creado, se aumenta la cantidad
-        AumentarProducto(document.getElementById(element.id.toString()))
-    }else{
-        //no esta el elemento creado
+	//se obtiene el elemento del DOM
+	const producto = document.getElementById("carro_" + element.id)
 
-        //se incluye el elemento en el array Carro
-        Carro.push(element.id)
+	//se obtiene la cantidad del producto
+	cantidad = carro.filter((carro) => carro.startsWith(element.id)).length
 
-        carroDIV = document.getElementById("TBCarro");
-        const fragment = document.createDocumentFragment();
-        //Teplate de productos
-        const template = document.querySelector("#T_Carro").content;
-        const TRR = template.querySelector("tr.conten")
-        //se crea el producto
-        STETR = element.id.toString()
-        TRR.setAttribute('id', STETR);
-        template.querySelector("td.name").textContent ="" + element.Name
-        template.querySelector("td.cantidad").textContent ="" + 1
-        template.querySelector("td.precio").textContent ="" + element.Precio
-        //botones de accion
-        template.querySelector("td.tdPlus button").setAttribute("onclick", "AumentarProducto(" + element.id.toString() + ")")
-        template.querySelector("td.tdLess button").setAttribute("onclick", "DisminuirProducto(" + "BDProductos."+ element.id.toString() + ")")
+	//modificamos los valores
+	producto.querySelector("td.cantidad").textContent = cantidad
+    producto.querySelector("td.price").textContent =element.price * cantidad
+
+	//actualizamos el total
+	ActualizarTotal()
+}
+
+//aumenta la cantidad de un producto en el carro
+const disminuirCantidad = (element) =>{
+	//se disminuye la cantidad en el carro
+	carro.pop(element.id)
+
+	//se obtiene el elemento del DOM
+	const producto = document.getElementById("carro_" + element.id)
+
+	//se obtiene la cantidad del producto
+	cantidad = carro.filter((carro) => carro.startsWith(element.id)).length
+
+	//se comprueba si 
+	if(cantidad == 0){
+		producto.remove()
+	}else{
+		//modificamos los valores
+	    producto.querySelector("td.cantidad").textContent = cantidad
+        producto.querySelector("td.price").textContent =element.price * cantidad
+	}
+
+	//actualizamos el total
+	ActualizarTotal()
+}
+
+//funcion para agregar un producto al carro
+const agregarAlCarro = (element)=>{
+	//se comprueba si el elemento ya esta en el carro
+	if(carro.includes(element.id)){
+		//si esta incluido, se llama a la funcion aumentarCantidad
+		aumentarCantidad(element)
+	}else{
+		//no esta incluido en el carro, se agrega al carro
+
+		//se agrega el producto al carro
+		carro.push(element.id)
+
+	     //variables
+         //section de productos (aqui se colocan los teamples)
+         const productosContenedor = document.getElementById("TBCarro");
+    
+         //se crea el fragment
+         const fragment = document.createDocumentFragment();
+    
+         //Teplate de productos
+         //se crean los productos con template y fragment
+         const template = document.querySelector("#T_producto").content;
+    
+         //se seleciona el contenedor
+         const DIVE =  template.querySelector("tr.conten")
+         //se le agrega un ID, en este caso es TR_ + 
+         const IDe = "carro_" + element.id
+         DIVE.setAttribute('id', IDe);
+    
+         //se edita el contenido del producto
+         template.querySelector("td.name").textContent ="" + element.name
+         template.querySelector("td.cantidad").textContent = "1"
+         template.querySelector("td.price").textContent ="" + element.price
+    
+         //se agrega funcinalidad al boton
+	     //llama a la funcion agregarAlCarro, esta funcion requiere el ID del objecto
+         template.querySelector("td.tdPlus button").setAttribute("onclick", "agregarAlCarro(BD." + element.id + ")")
+		 template.querySelector("td.tdLess button").setAttribute("onclick", "disminuirCantidad(BD." + element.id + ")")
+    
+         //se agrega el fragment al contenedor
         const clone = template.cloneNode(true)
         fragment.appendChild(clone)
-        carroDIV.appendChild(fragment)
-    }
+        productosContenedor.appendChild(fragment)
 
-    //se actualiza el total
-    ActualizarTotal()
+	    //actualizamos el total
+	    ActualizarTotal()
+	    }
 }
 
-//se aumenta la cantidad de un producto
-function AumentarProducto(element) {
-    //se obtienen datos
-    const ELid = element.id
-    const BDTem = Object.keys(BDProductos)
-    const PositionVal = BDTem.indexOf(ELid)
-    const ObjectTem = Object.values(BDProductos)[PositionVal]
-    const Prece = ObjectTem.Precio
 
-    Carro.push(ELid)
-    //se obtiene la cantidad de productos ya existentes
-    var contador = 0;
-    for(var i = 0; i < Carro.length; i++){
-        if (Carro[i] == ELid) {
-            contador++
-        }
-    }
-    //se cambian los valores
-    
-    element.querySelector("td.cantidad").textContent ="" + contador
-    element.querySelector("td.precio").textContent ="" + (contador * Number(Prece))
-    //se actualiza el total
-    ActualizarTotal()
+//se crea los articulos
+//se transforma la base de datos de un object a un array para poder usar forEach
+Object.values(BD).forEach(element => {
+	//variables
+	//section de productos (aqui se colocan los teamples)
+	const productosContenedor = document.getElementById("productos");
+
+	//se crea el fragment
+	const fragment = document.createDocumentFragment();
+
+	//Teplate de productos
+	//se crean los productos con template y fragment
+	const template = document.querySelector("#T_article").content;
+
+	//se seleciona el contenedor
+	const DIVE =  template.querySelector("article")
+	//se le agrega un ID, en este caso es TR_ + 
+	const IDe = "Producto_" + element.id
+	DIVE.setAttribute('id', IDe);
+
+	//se edita el contenido del producto
+	template.querySelector("h3.title").textContent ="" + element.name
+	template.querySelector("p.description").textContent ="" + element.description
+	template.querySelector("p.price").textContent ="" + element.price
+
+	//se agrega funcinalidad al boton
+	//llama a la funcion agregarAlCarro, esta funcion requiere el ID del objecto
+	template.querySelector("button.buttonAgregarAlCarrito").setAttribute("onclick", "agregarAlCarro(BD." + element.id + ")")
+
+	//se agrega el fragment al contenedor
+   const clone = template.cloneNode(true)
+   fragment.appendChild(clone)
+   productosContenedor.appendChild(fragment)
 }
+)
 
-//se disminuye o se borra productos del carro
-function DisminuirProducto(element) {
-    const ELid = element.id
-    const obj = document.getElementById(ELid)
-
-    //se obtiene la cantidad de productos ya existentes
-    var contador = 0
-    for(var i = 0; i < Carro.length; i++){
-        if (Carro[i] == ELid) {
-            contador++
-        }
-    }
-    //se obtienen datos
-    const BDTem = Object.keys(BDProductos)
-    const PositionVal = BDTem.indexOf(ELid)
-    const ObjectTem = Object.values(BDProductos)[PositionVal]
-    const Prece = ObjectTem.Precio
-    //se comprueba el numerp de productos ya existentes
-   if(contador > 1){
-    //hay mas de un producto ya existente, solo se cambia la cantidad
-    Carro.pop(ELid)
-    var contador = 0;
-    for(var i = 0; i < Carro.length; i++){
-        if (Carro[i] == ELid) {
-            contador++
-        }
-    }
-    //se cambian los datos
-    obj.querySelector("td.cantidad").textContent ="" + contador
-    obj.querySelector("td.precio").textContent ="" + (contador * Number(Prece))
-   }else{
-    //hay un solo producto, se borra
-    obj.remove();
-    Carro.pop(ELid)
-   }
-   //se actualiza el carro
-   ActualizarTotal()
-}
-
-//vacia el carro
-function VaciarCarro() {
-    //encuentra el objecto donde esta el carro
+const VaciarCarro = ()=>{
+	//encuentra el objecto donde esta el carro
     const carroDIV = document.getElementById("TBCarro")
+
     //un array sin datos repetidos
     let CARRITO = []
-    //elimina datos repetidos del carro
-    for(var i = 0; i < Carro.length; i++){
-        if(CARRITO.includes(Carro[i])){}else{
-            CARRITO.push(Carro[i])
+    //crea un array sin elementos repetidos
+    for(var i = 0; i < carro.length; i++){
+        if(CARRITO.includes(carro[i])){}else{
+            CARRITO.push(carro[i])
         }
     }
-    //borra el objecto del carro
+
+    //borra los objecto del carro
     for(var i = 0; i < CARRITO.length; i++){
         const productos = carroDIV.querySelector("tr")
-        console.log(i)
             
         productos.remove();    
         ActualizarTotal()
     }
+	
     //vacia el array Carro
-    Carro.length = 0
+    carro.length = 0
     ActualizarTotal()
 }
+
+//llamamos a la funcion ActualizarTotal
+ActualizarTotal()
